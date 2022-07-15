@@ -26,3 +26,7 @@ This is an app to choose random items from user-input list.
 1.  Shared Preferences
 2.  Provider
 3.  Convert
+
+### (Still) Todo
+
+1.  Import/Export txt files

@@ -140,6 +140,10 @@ class _DetailScreenState extends State<DetailScreen> {
             IconButton(
               onPressed: () {
                 dataList.refreshChosen(widget.index);
+                ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("List Refreshed!"),
+                          ));
               },
               icon: const Icon(Icons.refresh),
               splashRadius: 16,

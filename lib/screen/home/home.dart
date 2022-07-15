@@ -23,7 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
     DataList dataList = context.watch<DataList>();
     search = dataList.data
         .where((element) =>
-            (jsonDecode(element)['name']).contains(srcListCtrl.text))
+            ((jsonDecode(element)['name'].toString()).toLowerCase())
+                .contains(srcListCtrl.text.toLowerCase()))
         .toList();
 
     return Scaffold(
@@ -56,8 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             setState(() {
                               search = dataList.data
                                   .where((element) =>
-                                      (jsonDecode(element)['name'])
-                                          .contains(srcListCtrl.text))
+                                      ((jsonDecode(element)['name'].toString())
+                                              .toLowerCase())
+                                          .contains(
+                                              srcListCtrl.text.toLowerCase()))
                                   .toList();
                             });
                           },
@@ -67,10 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 onChanged: (keyword) {
                   setState(() {
                     search = dataList.data
-                        .where((element) => (jsonDecode(element)['name'])
-                            .contains(srcListCtrl.text))
+                        .where((element) =>
+                            ((jsonDecode(element)['name'].toString())
+                                    .toLowerCase())
+                                .contains(keyword.toLowerCase()))
                         .toList();
+                    // print(search.length);
                   });
+                  // print(search.length);
                 },
                 controller: srcListCtrl,
               ),

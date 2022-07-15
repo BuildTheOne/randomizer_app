@@ -23,7 +23,8 @@ class _DetailEditScreenState extends State<DetailEditScreen> {
     Map<String, dynamic> data = jsonDecode(dataList.data[widget.index]);
     List<String> dataItems = List<String>.from(data['data']);
     search = dataItems
-        .where((element) => element.contains(srcListCtrl.text))
+        .where((element) =>
+            element.toLowerCase().contains(srcListCtrl.text.toLowerCase()))
         .toList();
 
     return Scaffold(
@@ -61,7 +62,9 @@ class _DetailEditScreenState extends State<DetailEditScreen> {
                                     setState(() {
                                       search = dataItems
                                           .where((element) => element
-                                              .contains(srcListCtrl.text))
+                                              .toLowerCase()
+                                              .contains(srcListCtrl.text
+                                                  .toLowerCase()))
                                           .toList();
                                     });
                                   },
@@ -71,8 +74,9 @@ class _DetailEditScreenState extends State<DetailEditScreen> {
                         onChanged: (keyword) {
                           setState(() {
                             search = dataItems
-                                .where((element) =>
-                                    element.contains(srcListCtrl.text))
+                                .where((element) => element
+                                    .toLowerCase()
+                                    .contains(keyword.toLowerCase()))
                                 .toList();
                           });
                         },
@@ -145,58 +149,10 @@ class _DetailEditScreenState extends State<DetailEditScreen> {
                 ],
               ),
             ),
-            //
-            // Container(
-            //   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-            //   child: Container(
-            //     decoration: BoxDecoration(
-            //       border: Border.all(color: Colors.white),
-            //     ),
-            //     child: Row(
-            //       children: [
-            //         TextField(
-            //           style: const TextStyle(
-            //             fontSize: 20.0,
-            //           ),
-            //           decoration: InputDecoration(
-            //             hintText: "Search List",
-            //             suffixIcon: (srcListCtrl.text == "")
-            //                 ? IconButton(
-            //                     onPressed: () {},
-            //                     icon: const Icon(Icons.search),
-            //                   )
-            //                 : IconButton(
-            //                     onPressed: () {
-            //                       srcListCtrl.clear();
-            //                       setState(() {
-            //                         search = dataItems
-            //                             .where((element) =>
-            //                                 element.contains(srcListCtrl.text))
-            //                             .toList();
-            //                       });
-            //                     },
-            //                     icon: const Icon(Icons.close_sharp),
-            //                   ),
-            //           ),
-            //           onChanged: (keyword) {
-            //             setState(() {
-            //               search = dataItems
-            //                   .where((element) =>
-            //                       element.contains(srcListCtrl.text))
-            //                   .toList();
-            //             });
-            //           },
-            //           controller: srcListCtrl,
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-            //
             Container(
               child: Text(
-                (dataItems.length).toString() +
-                    (dataItems.length != 1 ? " items" : " item"),
+                (search.length).toString() +
+                    (search.length != 1 ? " items" : " item"),
                 style: const TextStyle(
                   fontSize: 16.0,
                 ),
@@ -233,59 +189,6 @@ class _DetailEditScreenState extends State<DetailEditScreen> {
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: Colors.blue,
-      //   onPressed: () {
-      //     showDialog(
-      //       context: context,
-      //       builder: (BuildContext context) {
-      //         return AlertDialog(
-      //           title: const Text('Create New Item'),
-      //           content: TextField(
-      //             controller: newItemCtrl,
-      //             decoration: const InputDecoration(hintText: "New List Name"),
-      //             autofocus: true,
-      //           ),
-      //           actions: [
-      //             TextButton(
-      //               child: const Text(
-      //                 'Create',
-      //                 style: TextStyle(
-      //                   fontSize: 20.0,
-      //                 ),
-      //               ),
-      //               onPressed: () {
-      //                 if (!dataItems.contains(newItemCtrl.text) &&
-      //                     newItemCtrl.text != "") {
-      //                   dataList.addDataItem(widget.index, newItemCtrl.text);
-      //                   Navigator.pop(context);
-      //                   newItemCtrl.clear();
-      //                 } else if (newItemCtrl.text == "") {
-      //                   ScaffoldMessenger.of(context).showSnackBar(
-      //                     const SnackBar(
-      //                       content: Text("Name cannot be blank"),
-      //                     ),
-      //                   );
-      //                 } else {
-      //                   ScaffoldMessenger.of(context).showSnackBar(
-      //                     const SnackBar(
-      //                       content: Text("Name already exists"),
-      //                     ),
-      //                   );
-      //                 }
-      //               },
-      //             ),
-      //           ],
-      //           actionsPadding: const EdgeInsets.all(8.0),
-      //         );
-      //       },
-      //     );
-      //   },
-      //   child: const Icon(
-      //     Icons.add,
-      //     size: 20.0,
-      //   ),
-      // ),
     );
   }
 }
